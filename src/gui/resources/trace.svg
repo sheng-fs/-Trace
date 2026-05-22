@@ -1,0 +1,6 @@
+<!-- 这是 SVG 源文件的占位符 -->
+<!-- 请将原始的 trace.svg 矢量图标文件放在这里 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#2563eb" rx="48"/>
+  <text x="50%" y="50%" font-size="120" text-anchor="middle" dy=".35em" fill="white">迹</text>
+</svg>

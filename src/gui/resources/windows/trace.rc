@@ -1,0 +1,4 @@
+// Trace Windows 资源文件
+// 用于在 .exe 文件中嵌入图标
+
+IDI_ICON1 ICON "trace.ico"
