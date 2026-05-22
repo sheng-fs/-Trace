@@ -85,5 +85,3 @@ elseif(UNIX)
     set(CPACK_RPM_PACKAGE_REQUIRES       "glibc >= 2.28, libstdc++ >= 9, qt6-qtbase >= 6.5")
     set(CPACK_RPM_PACKAGE_URL            "${PROJECT_HOMEPAGE_URL}")
 endif()
-
-include(CPack)
