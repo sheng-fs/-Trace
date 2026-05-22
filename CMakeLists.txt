@@ -12,6 +12,7 @@ add_subdirectory(src/common)
 add_subdirectory(src/core)
 add_subdirectory(src/daemon)
 add_subdirectory(src/gui)
+add_subdirectory(src/cli)
 add_subdirectory(src/updater)
 add_subdirectory(src/uninstaller)
 
