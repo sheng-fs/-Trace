@@ -1,10 +1,12 @@
 #ifndef TRACE_CORE_EVENT_H
 #define TRACE_CORE_EVENT_H
 
+#include <QtGlobal>
 #include <QDateTime>
 #include <QString>
 #include <QMetaType>
 #include <QVariantMap>
+#include <QList>
 
 // ============================================================================
 // 事件分类枚举 — 顶层大类
@@ -170,3 +172,4 @@ struct ActivityEvent {
 };
 
 #endif // TRACE_CORE_EVENT_H
+

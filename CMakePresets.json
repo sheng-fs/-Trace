@@ -1,0 +1,84 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "windows-msvc-debug",
+      "displayName": "Windows MSVC x64 Debug",
+      "description": "使用 VS 2022 MSVC 编译器 + Qt 6 调试构建",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_STANDARD": "17",
+        "BUILD_TESTS": "ON",
+        "BUILD_GUI": "ON",
+        "BUILD_CLI": "ON",
+        "BUILD_DAEMON": "ON",
+        "CMAKE_PREFIX_PATH": "C:/Qt/6.8.0/msvc2022_64"
+      }
+    },
+    {
+      "name": "windows-msvc-release",
+      "displayName": "Windows MSVC x64 Release",
+      "description": "使用 VS 2022 MSVC 编译器 + Qt 6 发布构建",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_STANDARD": "17",
+        "BUILD_TESTS": "OFF",
+        "BUILD_GUI": "ON",
+        "BUILD_CLI": "ON",
+        "BUILD_DAEMON": "ON",
+        "CMAKE_PREFIX_PATH": "C:/Qt/6.8.0/msvc2022_64"
+      }
+    },
+    {
+      "name": "macos-clang-debug",
+      "displayName": "macOS Clang Debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_STANDARD": "17",
+        "BUILD_TESTS": "ON",
+        "CMAKE_PREFIX_PATH": "/usr/local/opt/qt@6"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "linux-gcc-debug",
+      "displayName": "Linux GCC Debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_STANDARD": "17",
+        "BUILD_TESTS": "ON"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-debug",
+      "configurePreset": "windows-msvc-debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "windows-release",
+      "configurePreset": "windows-msvc-release",
+      "configuration": "Release"
+    }
+  ]
+}

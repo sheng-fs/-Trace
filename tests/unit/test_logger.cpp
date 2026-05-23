@@ -1,8 +1,10 @@
 #include <gtest/gtest.h>
+#include <QtGlobal>
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QTemporaryDir>
 #include <QFileInfo>
+#include <QDir>
 
 #include "event.h"
 #include "config.h"
@@ -322,3 +324,4 @@ int main(int argc, char** argv)
     QCoreApplication app(argc, argv);
     return RUN_ALL_TESTS();
 }
+

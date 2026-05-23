@@ -3,11 +3,14 @@
 
 #include "event.h"
 
+#include <QtGlobal>
 #include <QObject>
 #include <QMutex>
+#include <QMutexLocker>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QList>
+#include <QDebug>
 
 // ============================================================================
 // TraceLogger — 线程安全的事件日志记录器
@@ -25,7 +28,6 @@ class TraceLogger : public QObject
 
 public:
     static TraceLogger& instance();
-
     bool initialize(const QString& dbPath);
     void shutdown();
     bool isOpen() const;

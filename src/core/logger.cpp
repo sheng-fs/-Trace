@@ -508,3 +508,4 @@ int TraceLogger::purgeBefore(const QDateTime& before)
 
     return removed;
 }
+

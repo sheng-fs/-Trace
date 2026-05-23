@@ -1,6 +1,7 @@
 #ifndef TRACE_CORE_CONFIG_H
 #define TRACE_CORE_CONFIG_H
 
+#include <QtGlobal>
 #include <QString>
 #include <QStringList>
 #include <QSettings>

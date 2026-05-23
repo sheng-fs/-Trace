@@ -1,0 +1,32 @@
+CompileFlags:
+  Add:
+    - "-std=c++17"
+    - "--driver-mode=cl"
+  Remove:
+    - "-m*"
+    - "-fno*"
+    - "-Wno-*"
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      - modernize-*
+      - performance-*
+      - readability-*
+    Remove:
+      - modernize-use-trailing-return-type
+      - readability-magic-numbers
+      - readability-braces-around-statements
+      - modernize-use-equals-delete
+    CheckOptions:
+      readability-identifier-naming.ClassCase: CamelCase
+      readability-identifier-naming.StructCase: CamelCase
+      readability-identifier-naming.FunctionCase: camelBack
+      readability-identifier-naming.VariableCase: camelBack
+      readability-identifier-naming.MemberPrefix: "m_"
+      readability-identifier-naming.MemberCase: camelBack
+      readability-identifier-naming.EnumCase: CamelCase
+      readability-identifier-naming.EnumConstantCase: CamelCase
+
+Index:
+  Background: Build

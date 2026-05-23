@@ -142,3 +142,4 @@ void TraceConfig::load(const QString& configFilePath)
     m_excludePatterns = m_settings.value("exclude",   m_excludePatterns).toStringList();
     m_settings.endGroup();
 }
+
