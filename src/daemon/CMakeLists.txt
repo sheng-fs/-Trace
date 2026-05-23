@@ -15,14 +15,4 @@ target_sources(traced PRIVATE
     $<$<PLATFORM_ID:Linux>:  service_linux.cpp>
 )
 
-target_link_libraries(traced PRIVATE trace_core trace_common Qt6::Core Qt6::Network)
-
-# Windows: 编译为 Windows 服务入口
-if(WIN32)
-    target_link_libraries(traced PRIVATE advapi32)
-endif()
-
-# macOS: 需要 Foundation 框架
-if(APPLE)
-    target_link_libraries(traced PRIVATE ${FOUNDATION_LIB})
-endif()
+target_link_libraries(traced PRIVATE trace_core trace_common trace_platform Qt6::Core Qt6::Network)

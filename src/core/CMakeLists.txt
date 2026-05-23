@@ -39,7 +39,7 @@ add_library(trace_core STATIC
 
 target_include_directories(trace_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(trace_core PUBLIC Qt6::Core Qt6::Sql)
+target_link_libraries(trace_core PUBLIC Qt6::Core Qt6::Sql trace_platform)
 
 # 平台特定源文件过滤
 target_sources(trace_core PRIVATE

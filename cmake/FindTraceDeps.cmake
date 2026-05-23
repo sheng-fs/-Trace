@@ -70,29 +70,31 @@ endif()
 
 # ---------------------------------------------------------------------------
 # 5. 平台检测与系统库
+#    trace_platform 是一个 INTERFACE 虚目标，承载平台原生库依赖，
+#    后续 trace_core 和 traced 链接它即可。
 # ---------------------------------------------------------------------------
+add_library(trace_platform INTERFACE)
+
 if(WIN32)
     set(TRACE_PLATFORM "Windows")
     add_compile_definitions(TRACE_PLATFORM_WINDOWS)
 
-    # Windows 服务 API、USN Journal 等
-    target_link_libraries(trace_core INTERFACE
-        advapi32    # 服务管理
+    target_link_libraries(trace_platform INTERFACE
+        advapi32
         user32
-        shell32     # 回收站操作
+        shell32
     )
 
 elseif(APPLE)
     set(TRACE_PLATFORM "macOS")
     add_compile_definitions(TRACE_PLATFORM_MACOS)
 
-    # FSEvents、IOKit 等
     find_library(FOUNDATION_LIB Foundation REQUIRED)
     find_library(CORESERVICES_LIB CoreServices REQUIRED)
     find_library(IOKIT_LIB IOKit REQUIRED)
     find_library(APPKIT_LIB AppKit REQUIRED)
 
-    target_link_libraries(trace_core INTERFACE
+    target_link_libraries(trace_platform INTERFACE
         ${FOUNDATION_LIB}
         ${CORESERVICES_LIB}
         ${IOKIT_LIB}
@@ -103,30 +105,28 @@ elseif(UNIX)
     set(TRACE_PLATFORM "Linux")
     add_compile_definitions(TRACE_PLATFORM_LINUX)
 
-    # systemd (守护进程)
     find_package(PkgConfig QUIET)
     if(PkgConfig_FOUND)
         pkg_check_modules(SYSTEMD libsystemd)
         if(SYSTEMD_FOUND)
             message(STATUS "找到 systemd ${SYSTEMD_VERSION}")
-            target_link_libraries(trace_core INTERFACE
+            target_link_libraries(trace_platform INTERFACE
                 ${SYSTEMD_LIBRARIES})
-            target_include_directories(trace_core INTERFACE
+            target_include_directories(trace_platform INTERFACE
                 ${SYSTEMD_INCLUDE_DIRS})
         endif()
 
-        # libudev (硬件监控)
         pkg_check_modules(UDEV libudev)
         if(UDEV_FOUND)
             message(STATUS "找到 libudev ${UDEV_VERSION}")
-            target_link_libraries(trace_core INTERFACE
+            target_link_libraries(trace_platform INTERFACE
                 ${UDEV_LIBRARIES})
-            target_include_directories(trace_core INTERFACE
+            target_include_directories(trace_platform INTERFACE
                 ${UDEV_INCLUDE_DIRS})
         endif()
     endif()
 
-    target_link_libraries(trace_core INTERFACE pthread)
+    target_link_libraries(trace_platform INTERFACE pthread)
 endif()
 
 message(STATUS "目标平台: ${TRACE_PLATFORM}")
