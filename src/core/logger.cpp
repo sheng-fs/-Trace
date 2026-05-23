@@ -238,7 +238,7 @@ qint64 TraceLogger::logHardwareEvent(const HardwareEvent& ev)
                         : QDateTime::currentMSecsSinceEpoch();
     a.source      = "hw_monitor";
     a.deviceId    = ev.interfacePath.isEmpty()
-                        ? QString("%1:%2").arg(ev.vendorId, ev.productId)
+                        ? QString("%1:%2").arg(ev.vendorId).arg(ev.productId)
                         : ev.interfacePath;
 
     return insertActivityEvent(a);
@@ -336,14 +336,15 @@ qint64 TraceLogger::logHardwareEvents(const QList<HardwareEvent>& events)
         a.category    = EventCategory::Hardware;
         a.action      = static_cast<quint8>(ev.action);
         a.summary     = QString("[%1] %2")
-                            .arg(static_cast<int>(ev.type), ev.name);
+                            .arg(static_cast<int>(ev.type))
+                            .arg(ev.name);
         a.details     = toJson(ev.toVariantMap());
         a.timestampMs = ev.time.isValid()
                             ? ev.time.toMSecsSinceEpoch()
                             : QDateTime::currentMSecsSinceEpoch();
         a.source      = "hw_monitor";
         a.deviceId    = ev.interfacePath.isEmpty()
-                            ? QString("%1:%2").arg(ev.vendorId, ev.productId)
+                            ? QString("%1:%2").arg(ev.vendorId).arg(ev.productId)
                             : ev.interfacePath;
 
         if (insertActivityEvent(a) > 0)

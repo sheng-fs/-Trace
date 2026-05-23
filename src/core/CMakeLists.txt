@@ -3,24 +3,6 @@
 # ============================================================================
 
 add_library(trace_core STATIC
-    # 文件监控
-    watcher/file_watcher.h
-    watcher/file_watcher_win.cpp
-    watcher/file_watcher_mac.mm
-    watcher/file_watcher_linux.cpp
-
-    # 硬件监控
-    hardware/hardware_monitor.h
-    hardware/hw_monitor_win.cpp
-    hardware/hw_monitor_mac.mm
-    hardware/hw_monitor_linux.cpp
-
-    # 系统监控
-    system/system_monitor.h
-    system/sys_monitor_win.cpp
-    system/sys_monitor_mac.mm
-    system/sys_monitor_linux.cpp
-
     # 事件模型
     event.h
 
@@ -41,9 +23,9 @@ target_include_directories(trace_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(trace_core PUBLIC Qt6::Core Qt6::Sql trace_platform)
 
-# 平台特定源文件过滤
+# 平台特定源文件
 target_sources(trace_core PRIVATE
-    $<$<PLATFORM_ID:Windows>: watcher/file_watcher_win.cpp hardware/hw_monitor_win.cpp system/sys_monitor_win.cpp>
-    $<$<PLATFORM_ID:Darwin>:  watcher/file_watcher_mac.mm  hardware/hw_monitor_mac.mm  system/sys_monitor_mac.mm>
-    $<$<PLATFORM_ID:Linux>:  watcher/file_watcher_linux.cpp hardware/hw_monitor_linux.cpp system/sys_monitor_linux.cpp>
+    $<$<PLATFORM_ID:Windows>: watcher/file_watcher.h watcher/file_watcher_win.cpp hardware/hardware_monitor.h hardware/hw_monitor_win.cpp system/system_monitor.h system/sys_monitor_win.cpp>
+    $<$<PLATFORM_ID:Darwin>:  watcher/file_watcher.h watcher/file_watcher_mac.mm  hardware/hardware_monitor.h hardware/hw_monitor_mac.mm  system/system_monitor.h system/sys_monitor_mac.mm>
+    $<$<PLATFORM_ID:Linux>:  watcher/file_watcher.h watcher/file_watcher_linux.cpp hardware/hardware_monitor.h hardware/hw_monitor_linux.cpp system/system_monitor.h system/sys_monitor_linux.cpp>
 )
